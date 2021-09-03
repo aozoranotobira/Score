@@ -1,0 +1,153 @@
+/* ダークモード対応 */
+:root {
+  --main-text: #333;
+  --main-background: #fcfcfc;
+  --shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-text: #ccc;
+    --main-background: #333;
+    --shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* 全体 */
+body {
+  font-family: sans-serif;
+  margin: 10px;
+  color: var(--main-text);
+  background-color: var(--main-background);
+}
+table, th, td {
+  border: 1px solid var(--main-text);
+  border-collapse: collapse;
+}
+
+/* 条件入力 */
+.input_radio {
+  display: none;
+}
+.input_radio + .label_radio {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 0 3px 0px;
+  padding: 3px 10px;
+  color: var(--main-background);
+  background-color: var(--main-text);
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+.input_radio:hover + .label_radio {
+  box-shadow: var(--shadow);
+}
+.input_radio:checked + .label_radio { 
+  color: #fcfcfc;
+  background-color: #c33;
+}
+.input_radio:disabled + .label_radio {
+  opacity: 0.75;
+}
+.button_point {
+  cursor: pointer;
+  font-size: 16px;
+  margin: 3px 1px 3px 1px;
+  padding: 5px 10px;
+  color: #c33;
+  background: #fcfcfc;
+  border: solid 2px #c33;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.button_point:hover {
+  color: #fcfcfc;
+  background: #c33;
+  box-shadow: var(--shadow);
+}
+.button_point:disabled {
+  color: #c33;
+  background: #fcfcfc;
+  opacity: 0.75;
+}
+
+/* スコアボード */
+#table_score {
+  margin: 10px 1px 5px 1px;
+  text-align: center;
+  font-size: 20px;
+}
+.td_player {
+  width: 70px;
+}
+.td_server {
+  width: 35px;
+}
+.td_center {
+  width: 10px;
+}
+#table_score, .td_player, .td_server, .td_center {
+  border: none;
+}
+
+/* スコアシート */
+#table_sheet_header {
+  margin: 10px 1px 5px 1px;
+  text-align: center;
+  font-size: 16px;
+}
+.td_name {
+  width: 80px;
+  height: 42px;
+}
+.td_games {
+  width: 35px;
+}
+.td_game {
+  width: 70px;
+  height: 28px;
+}
+
+.div_sheet {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.table_sheet {
+  margin: 10px 1px 5px 1px;
+  text-align: center;
+  font-size: 16px;
+  table-layout: fixed;
+}
+.table_sheet th {
+  width: 38px;
+  height: 30px;
+  position: sticky;
+  left: 0;
+  z-index: 2147483647;
+  color: #c33;
+  background-color: #eee;
+}
+.table_sheet td {
+  width: 35px;
+}
+::-webkit-scrollbar{
+  height: 10px;
+}
+::-webkit-scrollbar-track{
+  background: var(--main-background);
+  border-left: solid 1px var(--main-background);
+}
+::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px #999;
+}
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 600px) {
+  /* スマートフォン */
+  #table_score {
+    width: 100%;
+  }
+}

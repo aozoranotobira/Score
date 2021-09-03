@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=yes">
+		<meta name="description" content="バドミントン用ダブルスの得点を記録できます。スコアボードも同時進行で記入されます。サーブ権の移動が一目で分かります。">
+		<title>バドミントン ダブルス得点</title>
+		<link rel="manifest" href="manifest.json">
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="shortcut icon" href="favicon.ico">
+		<script src="./js/main.js"></script>
+		<script type="text/javascript">
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register("service-worker.js").then(function () {
+				console.log("[Service Worker] Register");
+			});
+		}
+		</script>
+	</head>
+	<body>
+		<input type="radio" class="input_radio" name="radio-point" id="point_11" /><label class="label_radio" for="point_11">11点</label>
+		<input type="radio" class="input_radio" name="radio-point" id="point_15" /><label class="label_radio" for="point_15">15点</label>
+		<input type="radio" class="input_radio" name="radio-point" id="point_21" checked /><label class="label_radio" for="point_21">21点</label>
+		<br/>
+		<input type="radio" class="input_radio" name="radio-game" id="game_1" /><label class="label_radio" for="game_1">1ゲーム</label>
+		<input type="radio" class="input_radio" name="radio-game" id="game_3" checked /><label class="label_radio" for="game_3">3ゲーム</label>
+		<br/>
+		<input type="radio" class="input_radio" name="radio-extra" id="extra" checked /><label class="label_radio" for="extra">延長あり</label>
+		<input type="radio" class="input_radio" name="radio-extra" id="no_extra" /><label class="label_radio" for="no_extra">延長なし</label>
+		<br/>
+		サーブ　
+		<input type="radio" class="input_radio" name="radio-serve" id="serve_a" checked /><label class="label_radio" for="serve_a">Ａ→Ｂ</label>
+		<input type="radio" class="input_radio" name="radio-serve" id="serve_b" /><label class="label_radio" for="serve_b">Ｂ→Ａ</label>
+		<br/>
+		コート　
+		<input type="radio" class="input_radio" name="radio-court" id="court_a" checked /><label class="label_radio" for="court_a">Ａ｜Ｂ</label>
+		<input type="radio" class="input_radio" name="radio-court" id="court_b" /><label class="label_radio" for="court_b">Ｂ｜Ａ</label>
+		<br/>
+		ﾌｧｰｽﾄ 　
+		<input type="radio" class="input_radio" name="radio-serve-a" id="first_a1" checked /><label class="label_radio" for="first_a1">Ａ１</label>
+		<input type="radio" class="input_radio" name="radio-serve-a" id="first_a2" /><label class="label_radio" for="first_a2">Ａ２</label>
+		<input type="radio" class="input_radio" name="radio-serve-b" id="first_b1" checked /><label class="label_radio" for="first_b1">Ｂ１</label>
+		<input type="radio" class="input_radio" name="radio-serve-b" id="first_b2" /><label class="label_radio" for="first_b2">Ｂ２</label>
+		<br/>
+		<button type="button" class="button_point" id="play">第１ゲーム開始</button>
+		<label class="label_time" id="time">00:00:00</label>
+		<br/>
+		<table id="table_score">
+			<tr>
+				<td class="td_player" id="left2_player">Ａ２</td>
+				<td class="td_server" id="left2_server"></td>
+				<td class="td_server" id="left_score" rowspan="2">0</td>
+				<td class="td_center" rowspan="2">-</td>
+				<td class="td_server" id="right_score" rowspan="2">0</td>
+				<td class="td_server" id="right1_server">Ｒ</td>
+				<td class="td_player" id="right1_player">Ｂ１</td>
+			</tr>
+			<tr>
+				<td class="td_player" id="left1_player">Ａ１</td>
+				<td class="td_server" id="left1_server">Ｓ</td>
+				<td class="td_server" id="right2_server"></td>
+				<td class="td_player" id="right2_player">Ｂ２</td>
+			</tr>
+			<tr>
+				<td class="td_player" colspan="3"><button type="button" class="button_point" id="left_point" disabled>Ａポイント</button></td>
+				<td class="td_center"></td>
+				<td class="td_player" colspan="3"><button type="button" class="button_point" id="right_point" disabled>Ｂポイント</button></td>
+			</tr>
+		</table>
+		<button type="button" class="button_point" id="back" disabled>戻す</button>
+		<button type="button" class="button_point" id="change" disabled>コートチェンジ</button>
+		<table id="table_sheet_header">
+			<tr>
+				<td class="td_name" rowspan="3">Ａ１(Ａ)</td>
+				<td class="td_games" id="games_a" rowspan="6">0</td>
+				<td class="td_game" id="game1" rowspan="2">0 : 0</td>
+				<td class="td_games" id="games_b" rowspan="6">0</td>
+				<td class="td_name" rowspan="3">Ｂ１(Ｂ)</td>
+			</tr>
+			<tr>
+			</tr>
+			<tr>
+				<td class="td_game" id="game2" rowspan="2">0 : 0</td>
+			</tr>
+			<tr>
+				<td class="td_name" rowspan="3">Ａ２(Ａ)</td>
+				<td class="td_name" rowspan="3">Ｂ２(Ｂ)</td>
+			</tr>
+			<tr>
+				<td class="td_game" id="game3" rowspan="2">0 : 0</td>
+			</tr>
+			<tr></tr>
+		</table>
+		<div class="div_sheet" id="div_sheet1">
+			<table class="table_sheet" id="table_sheet1">
+				<tr id="tr1_a1"><th>Ａ１</th></tr>
+				<tr id="tr1_a2"><th>Ａ２</th></tr>
+				<tr id="tr1_b1"><th>Ｂ１</th></tr>
+				<tr id="tr1_b2"><th>Ｂ２</th></tr>
+			</table>
+		</div>
+		<div class="div_sheet" id="div_sheet2">
+			<table class="table_sheet" id="table_sheet2">
+				<tr id="tr2_a1"><th>Ａ１</th></tr>
+				<tr id="tr2_a2"><th>Ａ２</th></tr>
+				<tr id="tr2_b1"><th>Ｂ１</th></tr>
+				<tr id="tr2_b2"><th>Ｂ２</th></tr>
+			</table>
+		</div>
+		<div class="div_sheet" id="div_sheet3">
+			<table class="table_sheet" id="table_sheet3">
+				<tr id="tr3_a1"><th>Ａ１</th></tr>
+				<tr id="tr3_a2"><th>Ａ２</th></tr>
+				<tr id="tr3_b1"><th>Ｂ１</th></tr>
+				<tr id="tr3_b2"><th>Ｂ２</th></tr>
+			</table>
+		</div>
+	</body>
+</html>
